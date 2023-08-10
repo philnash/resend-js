@@ -1,6 +1,6 @@
 {
   "tasks": {
     "dev": "deno run --watch main.ts",
-    "test": "deno test --allow-env --coverage=coverage && deno coverage coverage --lcov --output=coverage/coverage.lcov"
+    "test": "deno test --allow-env --coverage=coverage && deno coverage coverage --lcov --output=coverage/lcov.info"
   }
 }
