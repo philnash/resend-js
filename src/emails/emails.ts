@@ -3,7 +3,7 @@ import { Buffer } from "../deps.ts";
 
 type Attachment = {
   content?: string | Buffer;
-  filename?: string | false | undefined;
+  filename?: string | false;
   path?: string;
 };
 

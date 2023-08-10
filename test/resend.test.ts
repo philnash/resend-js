@@ -18,8 +18,8 @@ const apiKey = "re_123";
 const emailData: CreateEmailResponse = {
   id: "49a3999c-0ce1-4ea6-ab68-afcd6dc2e794",
 };
-const emailResponse: Promise<Response> = new Promise((resolve) =>
-  resolve(new Response(JSON.stringify(emailData)))
+const emailResponse: Promise<Response> = Promise.resolve(
+  new Response(JSON.stringify(emailData))
 );
 const expectedHeaders = {
   "Content-Type": "application/json",
@@ -33,7 +33,7 @@ async function stubFetch<T>(
   headers: HeadersInit,
   body: string,
   response: Promise<Response>,
-  fn: () => T
+  fn: () => Promise<T>
 ) {
   const fetchStub = stub(globalThis, "fetch", returnsNext([response]));
   const result = await fn();
