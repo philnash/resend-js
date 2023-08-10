@@ -28,7 +28,7 @@ export type CreateEmailOptions =
     })
   | (BaseCreateEmailOptions & { html: string; text?: string });
 
-type CreateEmailResponse = {
+export type CreateEmailResponse = {
   id: string;
 };
 
