@@ -20,6 +20,10 @@ jobs:
         uses: denoland/setup-deno@v1.1.2
       - name: Run tests
         run: deno task test
+      - name: fix code coverage paths
+        working-directory: ./coverage
+        run: |
+          sed -i 's@'$GITHUB_WORKSPACE'@/github/workspace/@g' lcov.info
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
