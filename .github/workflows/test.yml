@@ -1,6 +1,6 @@
 # This workflow will install Node.js dependencies and run tests with a single version of Node.js
 
-name: Test Deno Application
+name: Tests
 
 on:
   push:
