@@ -1,12 +1,14 @@
 # 📧 Resend Fetch 📧
 
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=philnash_resend-fetch&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=philnash_resend-fetch)  [![Test Deno Application](https://github.com/philnash/resend-fetch/actions/workflows/test.yml/badge.svg)](https://github.com/philnash/resend-fetch/actions/workflows/test.yml)
-
----
-
 This is a module that uses `fetch` to make requests to the [Resend API](https://resend.com/). The intention is to support platforms that support web platform features like `fetch` but do not have Node.js APIs like `http`, like [Deno](https://deno.land/) or [Cloudflare Workers](https://workers.cloudflare.com/).
 
 It is written in Deno and will be transpiled to JavaScript. It is intended to work in a similar method to the [Resend Node module](https://github.com/resendlabs/resend-node), though there are expected to be slight differences.
+
+---
+
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=philnash_resend-fetch&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=philnash_resend-fetch)  [![Test Deno Application](https://github.com/philnash/resend-fetch/actions/workflows/test.yml/badge.svg)](https://github.com/philnash/resend-fetch/actions/workflows/test.yml)
+
+---
 
 * [Usage](#usage)
   * [Installation](#installation)
