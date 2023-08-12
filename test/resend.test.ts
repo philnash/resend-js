@@ -91,7 +91,7 @@ describe("Resend", () => {
         assertEquals(result, emailData);
       });
 
-      it("throws an error if the API returns an 4xx error", () => {
+      it("throws an error if the API returns an 4xx error", async () => {
         const errorResponse = Promise.resolve(
           new Response("", {
             status: 422,
@@ -99,7 +99,7 @@ describe("Resend", () => {
               "The request body is missing one or more required fields.",
           })
         );
-        assertRejects(
+        await assertRejects(
           async () => {
             await stubFetch(
               url,
@@ -117,14 +117,14 @@ describe("Resend", () => {
         );
       });
 
-      it("throws an error if the API returns an 5xx error", () => {
+      it("throws an error if the API returns an 5xx error", async () => {
         const errorResponse = Promise.resolve(
           new Response("", {
             status: 500,
             statusText: "An unexpected error occurred.",
           })
         );
-        assertRejects(
+        await assertRejects(
           async () => {
             await stubFetch(
               url,
@@ -176,7 +176,7 @@ describe("Resend", () => {
         assertEquals(result, emailData);
       });
 
-      it("throws an Http error if the response is an error", () => {
+      it("throws an Http error if the response is an error", async () => {
         const errorResponse = Promise.resolve(
           new Response("", {
             status: 404,
@@ -185,14 +185,14 @@ describe("Resend", () => {
         );
 
         url.pathname += `/${emailData.id}blah`;
-        assertRejects(
-          () => {
-            return stubFetch(
+        await assertRejects(
+          async () => {
+            await stubFetch(
               url,
               "GET",
               expectedHeaders,
               null,
-              emailResponse,
+              errorResponse,
               () => {
                 return resend.emails.get(emailData.id);
               }
