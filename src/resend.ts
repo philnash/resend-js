@@ -39,6 +39,31 @@ export class Resend {
     };
   }
 
+  async get<T>(path: string): Promise<T> {
+    const url = new URL(`${this.baseUrl}${path}`);
+    try {
+      const response = await fetch(url, {
+        headers: this.headers,
+        method: "GET",
+      });
+      if (response.ok) {
+        return await response.json();
+      } else {
+        throw new ResendHttpError(
+          response.statusText,
+          response.status,
+          response
+        );
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new ResendError(error.message, { cause: error });
+      } else {
+        throw error;
+      }
+    }
+  }
+
   async post<T>(path: string, payload: PostPayload): Promise<T> {
     const url = new URL(`${this.baseUrl}${path}`);
     try {
