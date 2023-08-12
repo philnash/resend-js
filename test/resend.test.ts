@@ -175,6 +175,33 @@ describe("Resend", () => {
         );
         assertEquals(result, emailData);
       });
+
+      it("throws an Http error if the response is an error", () => {
+        const errorResponse = Promise.resolve(
+          new Response("", {
+            status: 404,
+            statusText: "The requested endpoint does not exist.",
+          })
+        );
+
+        url.pathname += `/${emailData.id}blah`;
+        assertRejects(
+          () => {
+            return stubFetch(
+              url,
+              "GET",
+              expectedHeaders,
+              null,
+              emailResponse,
+              () => {
+                return resend.emails.get(emailData.id);
+              }
+            );
+          },
+          ResendHttpError,
+          "The requested endpoint does not exist."
+        );
+      });
     });
   });
 });
