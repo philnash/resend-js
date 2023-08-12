@@ -16,7 +16,7 @@ import {
   assertRejects,
 } from "./deps.ts";
 import { version } from "../src/version.ts";
-import { ResendHttpError } from "../src/error.ts";
+import { ResendError, ResendHttpError } from "../src/error.ts";
 
 const apiKey = "re_123";
 const emailData: CreateEmailResponse = {
@@ -57,7 +57,7 @@ describe("Resend", () => {
   it("requires an API key", () => {
     assertThrows(
       () => new Resend(),
-      Error,
+      ResendError,
       'Missing API key. Pass it to the constructor `new Resend("re_123")`'
     );
   });

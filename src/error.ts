@@ -1,6 +1,14 @@
-export class ResendError extends Error {}
+export class ResendError extends Error {
+  constructor(message?: string, options?: ErrorOptions) {
+    super(message, options);
+    this.name = this.constructor.name;
+    Object.setPrototypeOf(this, new.target.prototype);
+  }
+}
 
-export class ResendHttpError extends Error {
+export class ResendNetworkError extends ResendError {}
+
+export class ResendHttpError extends ResendError {
   readonly status?: number;
   readonly response?: Response;
 
@@ -8,6 +16,5 @@ export class ResendHttpError extends Error {
     super(message);
     this.status = status;
     this.response = response;
-    Object.setPrototypeOf(this, ResendHttpError.prototype);
   }
 }

@@ -1,6 +1,6 @@
 import { baseUrl, apiKey } from "./config.ts";
 import { version } from "./version.ts";
-import { ResendError, ResendHttpError } from "./error.ts";
+import { ResendError, ResendHttpError, ResendNetworkError } from "./error.ts";
 import { CreateEmailOptions, Emails } from "./emails/emails.ts";
 
 type ResendOptions = {
@@ -28,7 +28,7 @@ export class Resend {
       this.apiKey = apiKey;
     }
     if (!this.apiKey) {
-      throw new Error(
+      throw new ResendError(
         'Missing API key. Pass it to the constructor `new Resend("re_123")`'
       );
     }
@@ -56,11 +56,7 @@ export class Resend {
         );
       }
     } catch (error) {
-      if (error instanceof Error) {
-        throw new ResendError(error.message, { cause: error });
-      } else {
-        throw error;
-      }
+      throw this.#rethrowError(error);
     }
   }
 
@@ -82,11 +78,17 @@ export class Resend {
         );
       }
     } catch (error) {
-      if (error instanceof Error) {
-        throw new ResendError(error.message, { cause: error });
-      } else {
-        throw error;
-      }
+      throw this.#rethrowError(error);
+    }
+  }
+
+  #rethrowError(error: unknown) {
+    if (error instanceof ResendHttpError) {
+      return error;
+    } else if (error instanceof Error) {
+      return new ResendNetworkError(error.message, { cause: error });
+    } else {
+      return error;
     }
   }
 }
