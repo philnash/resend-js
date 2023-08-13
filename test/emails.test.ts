@@ -8,50 +8,19 @@ import {
   describe,
   it,
   beforeEach,
-  stub,
-  returnsNext,
   assertThrows,
-  assertSpyCall,
   assertEquals,
   assertRejects,
 } from "./deps.ts";
-import { version } from "../src/version.ts";
+import { expectedHeaders, apiKey, stubFetch } from "./helpers.ts";
 import { ResendError, ResendHttpError } from "../src/error.ts";
 
-const apiKey = "re_123";
 const emailData: CreateEmailResponse = {
   id: "49a3999c-0ce1-4ea6-ab68-afcd6dc2e794",
 };
 const emailResponse: Promise<Response> = Promise.resolve(
   new Response(JSON.stringify(emailData))
 );
-const expectedHeaders = {
-  "Content-Type": "application/json",
-  "User-Agent": `resend-fetch:${version}`,
-  Authorization: `Bearer: ${apiKey}`,
-};
-
-async function stubFetch<T>(
-  url: string | URL,
-  method: "GET" | "POST",
-  headers: HeadersInit,
-  body: string | null,
-  response: Promise<Response> | Error,
-  fn: () => Promise<T>
-) {
-  const fetchStub = stub(globalThis, "fetch", returnsNext([response]));
-  try {
-    const result = await fn();
-    if (method === "GET") {
-      assertSpyCall(fetchStub, 0, { args: [url, { headers, method }] });
-    } else {
-      assertSpyCall(fetchStub, 0, { args: [url, { headers, body, method }] });
-    }
-    return result;
-  } finally {
-    fetchStub.restore();
-  }
-}
 
 describe("Resend", () => {
   it("requires an API key", () => {
