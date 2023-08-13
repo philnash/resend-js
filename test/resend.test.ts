@@ -222,6 +222,26 @@ describe("Resend", () => {
           "The requested endpoint does not exist."
         );
       });
+
+      it("rethrows any other errors", async () => {
+        const error = new Error("Oops");
+        await assertRejects(
+          async () => {
+            await stubFetch(
+              url,
+              "POST",
+              expectedHeaders,
+              JSON.stringify(payload),
+              error,
+              () => {
+                return resend.emails.get(emailData.id);
+              }
+            );
+          },
+          Error,
+          "Oops"
+        );
+      });
     });
   });
 });
