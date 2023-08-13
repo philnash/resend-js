@@ -36,7 +36,7 @@ async function stubFetch<T>(
   method: "GET" | "POST",
   headers: HeadersInit,
   body: string | null,
-  response: Promise<Response>,
+  response: Promise<Response> | Error,
   fn: () => Promise<T>
 ) {
   const fetchStub = stub(globalThis, "fetch", returnsNext([response]));
@@ -139,6 +139,26 @@ describe("Resend", () => {
           },
           ResendHttpError,
           "An unexpected error occurred."
+        );
+      });
+
+      it("rethrows any other errors", async () => {
+        const error = new Error("Oops");
+        await assertRejects(
+          async () => {
+            await stubFetch(
+              url,
+              "POST",
+              expectedHeaders,
+              JSON.stringify(payload),
+              error,
+              () => {
+                return resend.emails.send(payload);
+              }
+            );
+          },
+          Error,
+          "Oops"
         );
       });
     });
