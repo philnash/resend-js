@@ -3,7 +3,7 @@ import {
   CreateEmailOptions,
   CreateEmailResponse,
   GetEmailResponse,
-} from "../src/emails/emails.ts";
+} from "../src/emails/types.ts";
 import {
   describe,
   it,

@@ -1,7 +1,8 @@
 import { baseUrl, apiKey } from "./config.ts";
 import { version } from "./version.ts";
 import { ResendError, ResendHttpError, ResendNetworkError } from "./error.ts";
-import { CreateEmailOptions, Emails } from "./emails/emails.ts";
+import { Emails } from "./emails/emails.ts";
+import { CreateEmailOptions } from "./emails/types.ts";
 
 type ResendOptions = {
   baseUrl: string;
