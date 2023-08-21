@@ -128,7 +128,7 @@ describe("with an authenticated client", () => {
       id: "4ef9a417-02e9-4d39-ad75-9611e0fcc33c",
       to: ["delivered@resend.dev"],
       from: "Acme <onboarding@resend.dev>",
-      created_at: "2023-04-03T22:13:42.674981+00:00",
+      created_at: new Date("2023-04-03T22:13:42.674981+00:00"),
       subject: "Hello World",
       html: "Congrats on sending your <strong>first email</strong>!",
       last_event: "delivered",

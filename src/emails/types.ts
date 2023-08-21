@@ -36,7 +36,7 @@ export type GetEmailResponse = {
   id: string;
   to: string[];
   from: string;
-  created_at: string;
+  created_at: Date;
   subject: string;
   html: string | null;
   text?: string | null;

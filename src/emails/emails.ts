@@ -12,7 +12,10 @@ export class Emails {
     return this.resend.post<CreateEmailResponse>("/emails", options);
   }
 
-  get(id: string): Promise<GetEmailResponse> {
-    return this.resend.get<GetEmailResponse>(`/emails/${id}`);
+  async get(id: string): Promise<GetEmailResponse> {
+    const result = await this.resend.get<
+      Omit<GetEmailResponse, "created_at"> & { created_at: string }
+    >(`/emails/${id}`);
+    return { ...result, created_at: new Date(result.created_at) };
   }
 }
