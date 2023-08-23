@@ -3,6 +3,8 @@ import { version } from "./version.ts";
 import { ResendError, ResendHttpError, ResendNetworkError } from "./error.ts";
 import { Emails } from "./emails/emails.ts";
 import { CreateEmailOptions } from "./emails/types.ts";
+import { APIKeys } from "./api_keys/api_keys.ts";
+import { CreateAPIKeyOptions } from "./api_keys/types.ts";
 
 type ResendOptions = {
   baseUrl: string;
@@ -13,7 +15,7 @@ type DefaultHeaders = {
   "Content-Type": string;
 };
 
-type PostPayload = CreateEmailOptions;
+type PostPayload = CreateEmailOptions | CreateAPIKeyOptions;
 
 export class Resend {
   readonly baseUrl: string;
@@ -21,6 +23,7 @@ export class Resend {
   private readonly headers: DefaultHeaders;
 
   readonly emails = new Emails(this);
+  readonly apiKeys = new APIKeys(this);
 
   constructor(key?: string, options: ResendOptions = { baseUrl }) {
     this.baseUrl = options.baseUrl;
@@ -71,6 +74,27 @@ export class Resend {
       });
       if (response.ok) {
         return await response.json();
+      } else {
+        throw new ResendHttpError(
+          response.statusText,
+          response.status,
+          response
+        );
+      }
+    } catch (error) {
+      throw this.#rethrowError(error);
+    }
+  }
+
+  async remove(path: string): Promise<void> {
+    const url = new URL(`${this.baseUrl}${path}`);
+    try {
+      const response = await fetch(url, {
+        headers: this.headers,
+        method: "DELETE",
+      });
+      if (response.ok) {
+        return;
       } else {
         throw new ResendHttpError(
           response.statusText,

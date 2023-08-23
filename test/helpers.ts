@@ -11,7 +11,7 @@ export const expectedHeaders = {
 
 export async function stubFetch<T>(
   url: string | URL,
-  method: "GET" | "POST",
+  method: "GET" | "POST" | "DELETE",
   headers: HeadersInit,
   body: string | null,
   response: Promise<Response> | Error,
@@ -20,7 +20,7 @@ export async function stubFetch<T>(
   const fetchStub = stub(globalThis, "fetch", returnsNext([response]));
   try {
     const result = await fn();
-    if (method === "GET") {
+    if (method === "GET" || method === "DELETE") {
       assertSpyCall(fetchStub, 0, { args: [url, { headers, method }] });
     } else {
       assertSpyCall(fetchStub, 0, { args: [url, { headers, body, method }] });
