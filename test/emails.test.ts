@@ -12,7 +12,7 @@ import {
   assertRejects,
 } from "./deps.ts";
 import { expectedHeaders, apiKey, stubFetch } from "./helpers.ts";
-import { ResendHttpError } from "../src/error.ts";
+import { ResendHttpError, ResendNetworkError } from "../src/error.ts";
 
 const emailData: CreateEmailResponse = {
   id: "49a3999c-0ce1-4ea6-ab68-afcd6dc2e794",
@@ -182,7 +182,7 @@ describe("with an authenticated client", () => {
       );
     });
 
-    it("rethrows any other errors", async () => {
+    it("rethrows any other errors as a network error", async () => {
       const error = new Error("Oops");
       await assertRejects(
         async () => {
@@ -197,7 +197,7 @@ describe("with an authenticated client", () => {
             }
           );
         },
-        Error,
+        ResendNetworkError,
         "Oops"
       );
     });

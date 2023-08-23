@@ -5,7 +5,14 @@ import {
   GetAPIKeyResponse,
 } from "../src/api_keys/types.ts";
 import { ListResponse } from "../src/types.ts";
-import { describe, it, beforeEach, assertEquals } from "./deps.ts";
+import { ResendHttpError, ResendNetworkError } from "../src/error.ts";
+import {
+  describe,
+  it,
+  beforeEach,
+  assertEquals,
+  assertRejects,
+} from "./deps.ts";
 import { expectedHeaders, apiKey, stubFetch } from "./helpers.ts";
 
 describe("with an authenticated client", () => {
@@ -100,9 +107,9 @@ describe("with an authenticated client", () => {
 
   describe("deleting an api key", () => {
     const apiKeyId = "b6d24b8e-af0b-4c3c-be0c-359bbd97381e";
+    const url = new URL(`https://api.resend.com/api-keys/${apiKeyId}`);
 
     it("succeeds with a resolved promise", async () => {
-      const url = new URL(`https://api.resend.com/api-keys/${apiKeyId}`);
       await stubFetch(
         url,
         "DELETE",
@@ -112,6 +119,45 @@ describe("with an authenticated client", () => {
         async () => {
           await resend.apiKeys.remove(apiKeyId);
         }
+      );
+    });
+
+    it("it throws an Http error if the response is an error", async () => {
+      const errorResponse = Promise.resolve(
+        new Response("", {
+          status: 404,
+          statusText: "The requested endpoint does not exist.",
+        })
+      );
+
+      await assertRejects(
+        async () => {
+          await stubFetch(
+            url,
+            "DELETE",
+            expectedHeaders,
+            null,
+            errorResponse,
+            () => {
+              return resend.apiKeys.remove(apiKeyId);
+            }
+          );
+        },
+        ResendHttpError,
+        "The requested endpoint does not exist."
+      );
+    });
+
+    it("rethrows any other errors as a network error", async () => {
+      const error = new Error("Oops");
+      await assertRejects(
+        async () => {
+          await stubFetch(url, "DELETE", expectedHeaders, null, error, () => {
+            return resend.apiKeys.remove(apiKeyId);
+          });
+        },
+        ResendNetworkError,
+        "Oops"
       );
     });
   });
