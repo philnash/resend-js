@@ -5,6 +5,8 @@ import { Emails } from "./emails/emails.ts";
 import { CreateEmailOptions } from "./emails/types.ts";
 import { APIKeys } from "./api_keys/api_keys.ts";
 import { CreateAPIKeyOptions } from "./api_keys/types.ts";
+import { Domains } from "./domains/domains.ts";
+import { CreateDomainOptions } from "./domains/types.ts";
 
 type ResendOptions = {
   baseUrl: string;
@@ -15,7 +17,10 @@ type DefaultHeaders = {
   "Content-Type": string;
 };
 
-type PostPayload = CreateEmailOptions | CreateAPIKeyOptions;
+type PostPayload =
+  | CreateEmailOptions
+  | CreateAPIKeyOptions
+  | CreateDomainOptions;
 
 export class Resend {
   readonly baseUrl: string;
@@ -24,6 +29,7 @@ export class Resend {
 
   readonly emails = new Emails(this);
   readonly apiKeys = new APIKeys(this);
+  readonly domains = new Domains(this);
 
   constructor(key?: string, options: ResendOptions = { baseUrl }) {
     this.baseUrl = options.baseUrl;
@@ -64,7 +70,9 @@ export class Resend {
     }
   }
 
-  async post<T>(path: string, payload: PostPayload): Promise<T> {
+  post(path: string): Promise<void>;
+  post<T>(path: string, payload: PostPayload): Promise<T>;
+  async post<T>(path: string, payload?: PostPayload): Promise<T | void> {
     const url = new URL(`${this.baseUrl}${path}`);
     try {
       const response = await fetch(url, {
@@ -73,7 +81,11 @@ export class Resend {
         method: "POST",
       });
       if (response.ok) {
-        return await response.json();
+        if (typeof payload !== "undefined") {
+          return await response.json();
+        } else {
+          return;
+        }
       } else {
         throw new ResendHttpError(
           response.statusText,

@@ -1,4 +1,5 @@
 import { Resend } from "../resend.ts";
+import { WithStringCreatedAt } from "../types.ts";
 import {
   CreateEmailOptions,
   CreateEmailResponse,
@@ -13,9 +14,9 @@ export class Emails {
   }
 
   async get(id: string): Promise<GetEmailResponse> {
-    const result = await this.resend.get<
-      Omit<GetEmailResponse, "created_at"> & { created_at: string }
-    >(`/emails/${id}`);
+    const result = await this.resend.get<WithStringCreatedAt<GetEmailResponse>>(
+      `/emails/${id}`
+    );
     return { ...result, created_at: new Date(result.created_at) };
   }
 }

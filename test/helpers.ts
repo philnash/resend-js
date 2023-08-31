@@ -13,7 +13,7 @@ export async function stubFetch<T>(
   url: string | URL,
   method: "GET" | "POST" | "DELETE",
   headers: HeadersInit,
-  body: string | null,
+  body: string | null | undefined,
   response: Promise<Response> | Error,
   fn: () => Promise<T>
 ) {
