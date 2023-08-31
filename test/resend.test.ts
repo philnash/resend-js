@@ -1,5 +1,5 @@
 import { describe, it, assertThrows } from "./deps.ts";
-import { Resend } from "../main.ts";
+import { Resend } from "../mod.ts";
 import { ResendError } from "../src/error.ts";
 
 describe("Resend", () => {

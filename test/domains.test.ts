@@ -1,4 +1,4 @@
-import { Resend } from "../main.ts";
+import { Resend } from "../mod.ts";
 import { ListResponse } from "../src/types.ts";
 import { describe, it, beforeEach, assertEquals } from "./deps.ts";
 import { expectedHeaders, apiKey, stubFetch } from "./helpers.ts";

@@ -1,4 +1,4 @@
-import { Resend } from "../main.ts";
+import { Resend } from "../mod.ts";
 import {
   CreateEmailOptions,
   CreateEmailResponse,
