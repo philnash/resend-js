@@ -160,18 +160,20 @@ describe("with an authenticated client", () => {
     });
   });
 
-  describe("deleting a domain", async () => {
-    const id = "d91cd9bd-1176-453e-8fc1-35364d380206";
-    const domainRemoveUrl = new URL(`${url.toString()}/${id}`);
-    await stubFetch(
-      domainRemoveUrl,
-      "DELETE",
-      expectedHeaders,
-      undefined,
-      Promise.resolve(new Response()),
-      async () => {
-        await resend.domains.remove(id);
-      }
-    );
+  describe("deleting a domain", () => {
+    it("removes the domain and returns nothing", async () => {
+      const id = "d91cd9bd-1176-453e-8fc1-35364d380206";
+      const domainRemoveUrl = new URL(`${url.toString()}/${id}`);
+      await stubFetch(
+        domainRemoveUrl,
+        "DELETE",
+        expectedHeaders,
+        undefined,
+        Promise.resolve(new Response()),
+        async () => {
+          await resend.domains.remove(id);
+        }
+      );
+    });
   });
 });
