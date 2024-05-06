@@ -6,7 +6,7 @@ It is written in Deno and will be transpiled to JavaScript. It is intended to wo
 
 ---
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=philnash_resend-fetch&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=philnash_resend-fetch) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=philnash_resend-fetch&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=philnash_resend-fetch)  [![Test status](https://github.com/philnash/resend-fetch/actions/workflows/test.yml/badge.svg)](https://github.com/philnash/resend-fetch/actions/workflows/test.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=philnash_resend-fetch&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=philnash_resend-fetch) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=philnash_resend-fetch&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=philnash_resend-fetch) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=philnash_resend-fetch&metric=coverage)](https://sonarcloud.io/summary/new_code?id=philnash_resend-fetch) [![Test status](https://github.com/philnash/resend-fetch/actions/workflows/test.yml/badge.svg)](https://github.com/philnash/resend-fetch/actions/workflows/test.yml)
 
 ---
 

@@ -1,6 +1,10 @@
 {
   "tasks": {
     "dev": "deno run --watch mod.ts",
-    "test": "deno run --allow-write test/remove_coverage.ts && deno test --allow-env --coverage=coverage && deno coverage coverage --lcov --output=coverage/lcov.info"
+    "test": "deno run --allow-write test/remove_coverage.ts && deno test --allow-env --coverage=coverage && deno coverage coverage --lcov --output=coverage/lcov.info",
+    "build": "deno run --allow-write --allow-read --allow-net --allow-env --allow-sys --allow-run=npm ./scripts/build_npm.ts"
+  },
+  "imports": {
+    "@deno/dnt": "jsr:@deno/dnt@^0.41.1"
   }
 }
