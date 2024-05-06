@@ -10,16 +10,20 @@ It is written in Deno and will be transpiled to JavaScript. It is intended to wo
 
 ---
 
-* [Usage](#usage)
-  * [Installation](#installation)
-    * [JavaScript](#javascript)
-    * [Deno](#deno)
-  * [Examples](#examples)
-    * [Authenticate the client](#authenticate-the-client)
-      * [JavaScript](#javascript-1)
-      * [Deno](#deno-1)
-    * [Send an email](#send-an-email)
-* [License](#license)
+* [📧 ResendJS 📧](#-resendjs-)
+  * [Usage](#usage)
+    * [Installation](#installation)
+      * [JavaScript](#javascript)
+      * [Deno](#deno)
+    * [Examples](#examples)
+      * [Authenticate the client](#authenticate-the-client)
+        * [JavaScript](#javascript-1)
+        * [Deno](#deno-1)
+      * [Send an email](#send-an-email)
+  * [Contributing](#contributing)
+    * [Running the project](#running-the-project)
+    * [Running the tests](#running-the-tests)
+  * [License](#license)
 
 ## Usage
 
@@ -87,6 +91,24 @@ resend.emails.send({
 ```
 
 Note: resend-node supports rendering React emails using [React Email](https://react.email/), but ResendJS does not.
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/philnash/resend-fetch.
+
+### Running the project
+
+Fork and clone the project.
+
+The project is written with [Deno](https://deno.com/), so you will need to install the Deno runtime.
+
+### Running the tests
+
+You can run the tests with the Deno task:
+
+```sh
+deno task test
+```
 
 ## License
 
