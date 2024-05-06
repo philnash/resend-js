@@ -1,8 +1,8 @@
-# 📧 ResendJS 📧
+# 📧 Resend JS 📧
 
 This is a module that uses native JavaScript `fetch` to make requests to the [Resend API](https://resend.com/) and no other modules that require Node.js specific features. The intention is to support platforms that support web platform features like `fetch` but do not have Node.js APIs like `http`, like [Deno](https://deno.land/) or [Cloudflare Workers](https://workers.cloudflare.com/).
 
-It is written in Deno and will be transpiled to JavaScript. It is intended to work in a similar method to the [Resend Node module](https://github.com/resendlabs/resend-node), though there are expected to be slight differences.
+It is written in Deno and will be transpiled to JavaScript. It is intended to work in a similar method to the [Resend Node module](https://github.com/resendlabs/resend-node), though there are expected to be slight differences. Most importantly, resend-node depends on [@react-email/render](https://react.email/docs/utilities/render) and Resend JS does not.
 
 ---
 
@@ -10,7 +10,7 @@ It is written in Deno and will be transpiled to JavaScript. It is intended to wo
 
 ---
 
-* [📧 ResendJS 📧](#-resendjs-)
+* [📧 Resend JS 📧](#-Resend JS-)
   * [Usage](#usage)
     * [Installation](#installation)
       * [JavaScript](#javascript)
@@ -36,11 +36,11 @@ To use this library you will need a [Resend account](https://resend.com/signup) 
 Install with your favourite package manager:
 
 ```sh
-npm install resend-js
+npm install @philnash/resend
 
-yarn add resend-js
+yarn add @philnash/resend
 
-pnpm add resend-js
+pnpm add @philnash/resend
 ```
 
 #### Deno
@@ -48,7 +48,7 @@ pnpm add resend-js
 There's no need to install, just import it from it's URL:
 
 ```typescript
-import { Resend } from "https://deno.land/x/resend-js/mod.ts";
+import { Resend } from "https://deno.land/x/resend_js/mod.ts";
 ```
 
 ### Examples
@@ -86,11 +86,11 @@ resend.emails.send({
   from: "from@example.com",
   to: "to@example.com",
   subject: "Hello, World!",
-  html: "<h1>Hello, World!</h1><p>This is my first email sent with ResendJS</p>",
+  html: "<h1>Hello, World!</h1><p>This is my first email sent with Resend JS</p>",
 });
 ```
 
-Note: resend-node supports rendering React emails using [React Email](https://react.email/), but ResendJS does not.
+Note: resend-node supports rendering React emails using [React Email](https://react.email/), but Resend JS does not.
 
 ## Contributing
 
