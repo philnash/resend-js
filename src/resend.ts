@@ -1,4 +1,3 @@
-import { baseUrl, apiKey } from "./config.ts";
 import { version } from "./version.ts";
 import { ResendError, ResendHttpError, ResendNetworkError } from "./error.ts";
 import { Emails } from "./emails/emails.ts";
@@ -22,6 +21,8 @@ type PostPayload =
   | CreateAPIKeyOptions
   | CreateDomainOptions;
 
+const BASE_URL = "https://api.resend.com";
+
 export class Resend {
   readonly baseUrl: string;
   readonly apiKey?: string;
@@ -31,12 +32,9 @@ export class Resend {
   readonly apiKeys = new APIKeys(this);
   readonly domains = new Domains(this);
 
-  constructor(key?: string, options: ResendOptions = { baseUrl }) {
+  constructor(key?: string, options: ResendOptions = { baseUrl: BASE_URL }) {
     this.baseUrl = options.baseUrl;
     this.apiKey = key;
-    if (!key) {
-      this.apiKey = apiKey;
-    }
     if (!this.apiKey) {
       throw new ResendError(
         'Missing API key. Pass it to the constructor `new Resend("re_123")`'
