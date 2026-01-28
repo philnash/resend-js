@@ -6,24 +6,24 @@ It is written in Deno and will be transpiled to JavaScript. It is intended to wo
 
 ---
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=philnash_resend-fetch&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=philnash_resend-fetch) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=philnash_resend-fetch&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=philnash_resend-fetch) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=philnash_resend-fetch&metric=coverage)](https://sonarcloud.io/summary/new_code?id=philnash_resend-fetch) [![Test status](https://github.com/philnash/resend-fetch/actions/workflows/test.yml/badge.svg)](https://github.com/philnash/resend-fetch/actions/workflows/test.yml)
+[![Test status](https://github.com/philnash/resend-fetch/actions/workflows/test.yml/badge.svg)](https://github.com/philnash/resend-fetch/actions/workflows/test.yml)
 
 ---
 
-* [📧 Resend JS 📧](#-Resend JS-)
-  * [Usage](#usage)
-    * [Installation](#installation)
-      * [JavaScript](#javascript)
-      * [Deno](#deno)
-    * [Examples](#examples)
-      * [Authenticate the client](#authenticate-the-client)
-        * [JavaScript](#javascript-1)
-        * [Deno](#deno-1)
-      * [Send an email](#send-an-email)
-  * [Contributing](#contributing)
-    * [Running the project](#running-the-project)
-    * [Running the tests](#running-the-tests)
-  * [License](#license)
+- [📧 Resend JS 📧](#-Resend JS-)
+  - [Usage](#usage)
+    - [Installation](#installation)
+      - [JavaScript](#javascript)
+      - [Deno](#deno)
+    - [Examples](#examples)
+      - [Authenticate the client](#authenticate-the-client)
+        - [JavaScript](#javascript-1)
+        - [Deno](#deno-1)
+      - [Send an email](#send-an-email)
+  - [Contributing](#contributing)
+    - [Running the project](#running-the-project)
+    - [Running the tests](#running-the-tests)
+  - [License](#license)
 
 ## Usage
 
