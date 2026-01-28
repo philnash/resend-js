@@ -1,4 +1,4 @@
-import { stub, assertSpyCall, returnsNext } from "./deps.ts";
+import { assertSpyCall, returnsNext, stub } from "./deps.ts";
 import { version } from "../src/version.ts";
 
 export const apiKey = "re_123";
@@ -6,7 +6,7 @@ export const apiKey = "re_123";
 export const expectedHeaders = {
   "Content-Type": "application/json",
   "User-Agent": `resend-fetch:${version}`,
-  Authorization: `Bearer: ${apiKey}`,
+  Authorization: `Bearer ${apiKey}`,
 };
 
 export async function stubFetch<T>(
@@ -15,7 +15,7 @@ export async function stubFetch<T>(
   headers: HeadersInit,
   body: string | null | undefined,
   response: Promise<Response> | Error,
-  fn: () => Promise<T>
+  fn: () => Promise<T>,
 ) {
   const fetchStub = stub(globalThis, "fetch", returnsNext([response]));
   try {

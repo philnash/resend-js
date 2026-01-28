@@ -37,11 +37,11 @@ export class Resend {
     this.apiKey = key;
     if (!this.apiKey) {
       throw new ResendError(
-        'Missing API key. Pass it to the constructor `new Resend("re_123")`'
+        'Missing API key. Pass it to the constructor `new Resend("re_123")`',
       );
     }
     this.headers = {
-      Authorization: `Bearer: ${this.apiKey}`,
+      Authorization: `Bearer ${this.apiKey}`,
       "Content-Type": "application/json",
       "User-Agent": `resend-fetch:${version}`,
     };
@@ -60,7 +60,7 @@ export class Resend {
         throw new ResendHttpError(
           response.statusText,
           response.status,
-          response
+          response,
         );
       }
     } catch (error) {
@@ -88,7 +88,7 @@ export class Resend {
         throw new ResendHttpError(
           response.statusText,
           response.status,
-          response
+          response,
         );
       }
     } catch (error) {
@@ -109,7 +109,7 @@ export class Resend {
         throw new ResendHttpError(
           response.statusText,
           response.status,
-          response
+          response,
         );
       }
     } catch (error) {
